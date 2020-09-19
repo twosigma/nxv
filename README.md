@@ -1,4 +1,4 @@
-<img src="./logo/logo-256.png" align="right" width="256px" height="256px">
+<img src="./logo/logo-128.png" align="right" width="128px" height="128px">
 
 # `nxv` renders NetworkX graphs using GraphViz
 
