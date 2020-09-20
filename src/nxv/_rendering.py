@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-from typing import Optional
+from typing import Optional, Union
 
 import networkx as nx
 
@@ -95,13 +95,13 @@ def _default_subgraph_func(u, d):
 
 def _to_gv(graph, style: Style, subgraph_func=None):
     """
-    Serializes a NetworkX graph as a GraphViz string.
+    Serializes a `NetworkX`_ graph as a `GraphViz`_ string.
 
-    :param graph: A NetworkX ``Graph``, ``DiGraph``, ``MultiGraph``, or ``MultiDiGraph``.
+    :param graph: A `NetworkX`_ ``Graph``, ``DiGraph``, ``MultiGraph``, or ``MultiDiGraph``.
     :param style: A :class:`~nxv.Style` object.
-    :param subgraph_func: An optional function ``f(u, d)`` that returns a subgraph key, where ``u`` is a NetworkX node
+    :param subgraph_func: An optional function ``f(u, d)`` that returns a subgraph key, where ``u`` is a `NetworkX`_ node
                           and ``d`` is its attribute dict.
-    :return: The raw GraphViz string format to pass as input to one of the GraphViz layout algorithms.
+    :return: The raw `GraphViz`_ string format to pass as input to one of the GraphViz layout algorithms.
     """
 
     if subgraph_func is None:
@@ -164,32 +164,38 @@ def _to_gv(graph, style: Style, subgraph_func=None):
 
 
 def render(
-    graph,
+    graph: Union[nx.Graph, nx.DiGraph, nx.MultiGraph, nx.MultiDiGraph],
     style: Optional[Style] = None,
     *,
     algorithm: str = "dot",
     format: Optional[str] = None,
     graphviz_bin: Optional[str] = None,
     subgraph_func=None,
-):
+) -> Optional[bytes]:
     """
-    Renders a `NetworkX <https://networkx.github.io/documentation/stable/>`_ graph.
+    Render a `NetworkX`_ graph using `GraphViz`_.
 
     In a Jupyter notebook, this will automatically display as an SVG.
 
-    :param graph: A NetworkX ``Graph``, ``DiGraph``, ``MultiGraph``, or ``MultiDiGraph``.
-    :param style: An optional :class:`~nxv.Style` object.
-    :param subgraph_func: An optional function ``f(u, d)`` that returns a subgraph key, where ``u`` is a NetworkX node
+    :param graph: A `NetworkX`_ graph.
+    :param style: A style specifying how graph nodes and edges should map to `GraphViz attributes`_.
+    :param subgraph_func: An optional function ``f(u, d)`` that returns a subgraph key, where ``u`` is a `NetworkX`_ node
                           and ``d`` is its attribute dict. If it returns ``None`` the node is not in any subgraph.
-    :param algorithm: The GraphViz layout algorithm. Valid options are ``'circo'``, ``'dot'``, ``'fdp'``, ``'neato'``,
-                      ``'osage'``, ``'sfdp'``, ``'twopi'``. Defaults to ``'dot'``.
-    :param format: The GraphViz output format. Valid options include ``'svg'`` and ``'raw'``. In a Jupyter
-                   notebook, prefixing the ``format`` with ``'ipython/'`` will automatically display the rendered
-                   output. Defaults to ``'ipython/svg'`` in a Jupyter notebook.
-    :param graphviz_bin: The bin directory of the GraphViz installation.
-                         Defaults to the GRAPHVIZ_BIN environment variable.
-    :return: If ``format`` is not an ``'ipython/*'`` format, the render output; otherwise, ``None``.
-    :raises GraphVizError: If GraphViz failed to run on the given inputs.
+    :param algorithm: The `GraphViz`_ layout algorithm. Valid options are ``"circo"``, ``"dot"``, ``"fdp"``, ``"neato"``,
+                      ``"osage"``, ``"sfdp"``, ``"twopi"``. Defaults to ``"dot"``.
+    :param format: The `GraphViz`_ output format. Valid options include ``"svg"`` and ``"raw"``. In a Jupyter
+                   notebook, prefixing the ``format`` with ``"ipython/"`` will automatically display the rendered
+                   output. When running in an interactive setting like a Jupyter notebook, the default is ``"ipython/svg"``.
+                   Otherwise, this parameter is required.
+    :param graphviz_bin: The ``bin`` directory of the `GraphViz`_ installation.
+                         Defaults to the ``GRAPHVIZ_BIN`` environment variable.
+                         If neither this parameter nor the ``GRAPHVIZ_BIN`` environment variable is set,
+                         then nxv will try to autodetect the ``bin`` directory of the `GraphViz`_ installation.
+                         This behavior is for convenience and should not be relied on in production settings.
+    :return: If ``format`` is not an ``"ipython/*"`` format, the render output; otherwise, ``None``.
+    :raises GraphVizInstallationNotFoundError: If nxv cannot find a `GraphViz`_ installation.
+    :raises GraphVizAlgorithmNotFoundError: If nxv cannot find the specified algorithm in a `GraphViz`_ installation.
+    :raises GraphVizError: If `GraphViz`_ failed to run on the given inputs.
     """
     if format is None:
         if _ipython.is_execution_context():
@@ -233,10 +239,10 @@ def _to_byte(value):
 
 def color(channels):
     """
-    Convert RGB or RGBA color channel values to a GraphViz color string.
+    Convert RGB or RGBA color channel values to a `GraphViz`_ color string.
 
     :param channels: The color channel values, either RGB or RGBA. Values should be in the range [0, 1].
-    :return: The GraphViz color string.
+    :return: The `GraphViz`_ color string.
     """
     assert len(channels) in (3, 4)
     return "#" + "".join(f"{_to_byte(value):02X}" for value in channels)

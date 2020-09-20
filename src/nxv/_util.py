@@ -62,7 +62,7 @@ def uniform_cost_traversal(sources, traverse, *, cost=None):
 
 def neighborhood(graph, nodes, *, radius=None, cost=None):
     """
-    Gets the subgraph in the neighborhood of the specified nodes.
+    Get the subgraph in the neighborhood of the specified nodes.
 
     This is useful for viewing a small portion of a large graph.
 
@@ -144,7 +144,7 @@ ORDERED_GRAPH_TYPES = (
 
 def is_directed_graph(graph):
     """
-    Returns whether the graph has directed edges.
+    Get whether the graph has directed edges.
 
     :param graph: The graph.
     :return: True if the graph has directed edges.
@@ -154,7 +154,7 @@ def is_directed_graph(graph):
 
 def is_multi_graph(graph):
     """
-    Returns whether the graph has multi-edges.
+    Get whether the graph has multi-edges.
 
     :param graph: The graph.
     :return: True if the graph has multi-edges.
@@ -164,7 +164,7 @@ def is_multi_graph(graph):
 
 def is_ordered_graph(graph):
     """
-    Returns whether the graph has ordered nodes and edges.
+    Get whether the graph has ordered nodes and edges.
 
     :param graph: The graph.
     :return: True if the graph has ordered nodes and edges.
@@ -174,7 +174,7 @@ def is_ordered_graph(graph):
 
 def create_graph(directed, multi, ordered):
     """
-    Creates an empty graph of the specified kind.
+    Create an empty graph of the specified kind.
 
     :param directed: Should the graph have directed edges?
     :param multi: Should the graph allow multi-edges?
@@ -186,7 +186,7 @@ def create_graph(directed, multi, ordered):
 
 def to_ordered_graph(graph, node_key=None, edge_key=None, attr_key=None):
     """
-    Creates an ordered copy of the specified graph, with nodes and edges ordered by the specified key functions.
+    Create an ordered copy of the specified graph, with nodes and edges ordered by the specified key functions.
 
     :param graph: The graph to order.
     :param node_key: The node key function, ``node_key(u, d)``. Defaults to the identity function.

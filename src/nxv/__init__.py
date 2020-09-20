@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-"""Render NetworkX graphs using GraphViz"""
+"""Render `NetworkX`_ graphs using `GraphViz`_"""
 
 __author__ = "Timothy Shields"
 __maintainer__ = "Timothy Shields"
@@ -28,12 +28,13 @@ from nxv._graphviz import (
     GraphVizInstallationNotFoundError,
 )
 from nxv._rendering import render
-from nxv._style import Style
+from nxv._style import Style, compose
 from nxv._util import boundary, contrasting_color, neighborhood, to_ordered_graph
 
 __all__ = [
     "render",
     "Style",
+    "compose",
     "chain",
     "switch",
     "neighborhood",

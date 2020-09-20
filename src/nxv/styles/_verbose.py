@@ -27,7 +27,7 @@ def _verbose_edge(*args):
 
 def verbose() -> Style:
     """
-    Get a verbose :class:`~nxvz.Style` that shows all of the data in a graph.
+    Get a verbose :class:`~nxv.Style` that shows all of the data in a graph.
 
     :return: A verbose :class:`~nxv.Style`.
     """

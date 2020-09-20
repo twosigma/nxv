@@ -2,3 +2,5 @@ __pycache__
 .pytest_cache
 .coverage
 poetry.lock
+*.egg-info
+_build

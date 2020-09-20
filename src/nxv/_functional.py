@@ -13,12 +13,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-"""Utilities for composing functions"""
+"""Utilities for composing functions."""
 
 
 def _apply(func, *args, **kwargs):
     """
-    Applies a maybe-function to positional and named arguments.
+    Apply a maybe-function to positional and named arguments.
 
     The result is ``func(*args, **kwargs)`` if ``callable(func)``, otherwise ``func``.
 
@@ -35,7 +35,7 @@ def _apply(func, *args, **kwargs):
 
 def chain(funcs):
     """
-    Chains a sequence of dict-returning functions together to form a new dict-returning function.
+    Chain a sequence of dict-returning functions together to form a new dict-returning function.
 
     The result is a function ``f(*args, **kwargs)`` that returns
     ``{**apply(funcs[0], *args, **kwargs), **apply(funcs[1], *args, **kwargs), ...}``.
@@ -57,7 +57,7 @@ def chain(funcs):
 
 def switch(key, funcs, *, default=None):
     """
-    Combines a dict of keyed functions to form a new function.
+    Combine a dict of keyed functions to form a new function.
 
     The result is a function ``f(*args, **kwargs)`` that returns
     ``apply(funcs[key(*args, **kwargs)], *args, **kwargs)``.

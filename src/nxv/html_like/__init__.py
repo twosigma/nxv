@@ -14,9 +14,15 @@
 # limitations under the License.
 #
 """
-Functions for building GraphViz HTML-like labels.
+The ``nxv.html_like`` subpackage provides functions for building
+`GraphViz HTML-like labels <https://graphviz.org/doc/info/shapes.html#html>`_.
 
-See https://www.graphviz.org/doc/info/shapes.html#html
+The idiomatic import for this subpackage is: 
+
+.. code-block:: python
+
+   import nxv.html_like as H
+
 """
 
 from nxv.html_like._html_like import (

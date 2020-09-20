@@ -21,11 +21,10 @@ import nxv
 
 
 def main():
+    os.makedirs("docs/_static/logo", exist_ok=True)
     graph = nx.Graph()
     nx.add_path(graph, [0, 1, 2, 3, 4, 5, 0])
     nx.add_star(graph, [6, 0, 1, 2, 3, 4, 5])
-
-    os.makedirs("logo", exist_ok=True)
     for size in [16, 32, 40, 48, 64, 128, 256]:
         style = nxv.Style(
             graph={
@@ -45,9 +44,10 @@ def main():
             },
             edge={"penwidth": 5},
         )
-        output = nxv.render(graph, style, algorithm="neato", format="png")
-        with open(f"logo/logo-{size}.png", "wb") as f:
-            f.write(output)
+        for format in ["svg", "png"]:
+            output = nxv.render(graph, style, algorithm="neato", format=format)
+            with open(f"docs/_static/logo/logo-{size}.{format}", "wb") as f:
+                f.write(output)
 
 
 if __name__ == "__main__":

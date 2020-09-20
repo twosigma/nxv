@@ -20,19 +20,19 @@ from nxv._functional import chain
 
 class Style:
     """
-    Defines how to style a `NetworkX <https://networkx.github.io/documentation/stable/>`_ graph using GraphViz.
+    A specification for how to style a `NetworkX`_ graph using `GraphViz`_.
 
-    See `the GraphViz attributes documentation <https://graphviz.gitlab.io/_pages/doc/info/attrs.html>`_ for
-    information on what attributes are available to use in ``graph``, ``node``, ``edge``, and ``subgraph``.
+    See the `GraphViz attributes`_ documentation for information on what attributes
+    are available to use with the ``graph``, ``node``, ``edge``, and ``subgraph`` parameters.
 
-    :param graph: An optional dict of GraphViz graph attributes, or a function ``f(g, d)`` that returns it, in which
-                  ``g`` is the NetworkX graph and ``d`` is its attribute dict.
-    :param node: An optional dict of GraphViz node attributes, or a function ``f(u, d)`` that returns it, in which
-                 ``u`` is a NetworkX node and ``d`` is its attribute dict.
-    :param edge: An optional dict of GraphViz edge attributes, or a function ``f(u, v, d)`` that returns it, in which
-                 ``(u, v)`` is a NetworkX edge and ``d`` is its attribute dict. If styling a graph with multi-edges,
+    :param graph: An optional dict of `GraphViz graph attributes`_, or a function ``f(g, d)`` that returns it, in which
+                  ``g`` is the `NetworkX`_ graph and ``d`` is its attribute dict.
+    :param node: An optional dict of `GraphViz node attributes`_, or a function ``f(u, d)`` that returns it, in which
+                 ``u`` is a `NetworkX`_ node and ``d`` is its attribute dict.
+    :param edge: An optional dict of `GraphViz edge attributes`_, or a function ``f(u, v, d)`` that returns it, in which
+                 ``(u, v)`` is a `NetworkX`_ edge and ``d`` is its attribute dict. If styling a graph with multi-edges,
                  the signature should be ``f(u, v, k, d)`` instead, where ``k`` is the edge key.
-    :param subgraph: An optional dict of GraphViz subgraph attributes, or a function ``f(s)`` that returns it, in which
+    :param subgraph: An optional dict of `GraphViz subgraph attributes`_, or a function ``f(s)`` that returns it, in which
                      ``s`` is a subgraph key. This only applies when calling ``nxv.render`` with a ``subgraph_func``.
     """
 

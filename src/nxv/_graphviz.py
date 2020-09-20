@@ -22,15 +22,15 @@ from typing import List, Optional
 
 
 class GraphVizError(Exception):
-    """Raised when GraphViz fails."""
+    """Raised when a `GraphViz`_ run fails."""
 
 
 class GraphVizInstallationNotFoundError(Exception):
-    """Raised when a GraphViz installation is not found."""
+    """Raised when a `GraphViz`_ installation is not found."""
 
 
 class GraphVizAlgorithmNotFoundError(Exception):
-    """Raise when a GraphViz algorithm is not found."""
+    """Raised when a `GraphViz`_ algorithm is not found."""
 
 
 @lru_cache()
@@ -110,15 +110,15 @@ def get_graphviz_algorithm_path(graphviz_bin: Optional[str], algorithm: str) -> 
 
 def run(gv, algorithm, format, graphviz_bin):
     """
-    Runs a GraphViz layout algorithm on a GraphViz string to product an output with the specified format.
+    Runs a `GraphViz`_ layout algorithm on a `GraphViz`_ string to product an output with the specified format.
 
-    :param gv: A GraphViz string.
-    :param algorithm: A GraphViz layout algorithm.
-    :param format: A GraphViz output format.
-    :param graphviz_bin: The bin directory of the GraphViz installation.
-                         Defaults to the GRAPHVIZ_BIN environment variable.
+    :param gv: A `GraphViz`_ string.
+    :param algorithm: A `GraphViz`_ layout algorithm.
+    :param format: A `GraphViz`_ output format.
+    :param graphviz_bin: The bin directory of the `GraphViz`_ installation.
+                         Defaults to the ``GRAPHVIZ_BIN`` environment variable.
     :return: The output bytes.
-    :raises GraphVizError: If GraphViz failed to run on the given inputs.
+    :raises GraphVizError: If `GraphViz`_ failed to run on the given inputs.
     """
     algorithm_path = get_graphviz_algorithm_path(graphviz_bin, algorithm)
     p = Popen(
