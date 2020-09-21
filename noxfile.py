@@ -51,10 +51,8 @@ def black(session):
 def lint(session):
     """Lint using flake8."""
     args = session.posargs or SOURCES
-    install_with_constraints(
-        session, "flake8", "flake8-black", "flake8-bugbear", "flake8-import-order"
-    )
-    session.run("flake8", *args)
+    session.run("poetry", "install", external=True)
+    session.run("poetry", "run", "flake8", *args)
 
 
 @nox.session(python=PYTHON_VERSIONS)
