@@ -21,7 +21,10 @@ jobs:
       uses: ts-graphviz/setup-graphviz@v1
     - run: pip install nox
     - run: pip install poetry
-    - run: nox
+    - name: Lint
+      run: nox -s lint
+    - name: Run test suite
+      run: nox -s tests
       env:
         GRAPHVIZ_BIN: ${{ matrix.graphviz_bin }}
  
