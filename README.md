@@ -4,9 +4,11 @@
 
 nxv renders NetworkX graphs using GraphViz.
 
-- Documentation: https://nxv.readthedocs.io/
-
 <img src="./docs/_static/example/quickstart_graph.svg" align="right">
+
+# Documentation
+
+https://nxv.readthedocs.io/
 
 # Basic Usage
 
