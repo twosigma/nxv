@@ -1,4 +1,4 @@
-<img src="./docs/_static/logo/logo.svg" align="right">
+<img src="./docs/_static/logo/logo.svg" align="left">
 
 # nxv
 
