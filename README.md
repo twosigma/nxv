@@ -2,7 +2,7 @@
 
 # nxv
 
-nxv renders NetworkX graphs using GraphViz.
+Render NetworkX graphs using GraphViz.
 
 # Documentation
 
