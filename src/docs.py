@@ -13,9 +13,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+import functools
 import logging
 import os
-from functools import wraps
+import shutil
 
 import networkx as nx
 
@@ -32,6 +33,7 @@ def main():
 
 
 def build_examples():
+    shutil.rmtree("docs/_static/example", ignore_errors=True)
     os.makedirs("docs/_static/example", exist_ok=True)
     for example in EXAMPLES:
         build_example(example)
@@ -39,8 +41,8 @@ def build_examples():
 
 def build_example(example):
     path = f"docs/_static/example/{example.__name__}.svg"
+    LOGGER.info(f"Rendering {path}")
     with open(path, "wb") as f:
-        LOGGER.info(f"Rendering {path}")
         f.write(nxv.render(**example(), format="svg"))
 
 
@@ -51,7 +53,7 @@ def register_example(example):
 
 def after_example(predecessor_example):
     def decorator(example):
-        @wraps(example)
+        @functools.wraps(example)
         def decorated_example():
             return example(**predecessor_example())
 
@@ -115,6 +117,7 @@ def quickstart_graph_functional_style(graph):
 
 
 def build_logo():
+    shutil.rmtree("docs/_static/logo", ignore_errors=True)
     os.makedirs("docs/_static/logo", exist_ok=True)
     graph = nx.Graph()
     nx.add_path(graph, [0, 1, 2, 3, 4, 5, 0])
@@ -136,14 +139,14 @@ def build_logo():
         },
         edge={"penwidth": 5},
     )
-    path = f"docs/_static/logo/logo.svg"
-    LOGGER.info(f"Rendering: {path}")
+    path = "docs/_static/logo/logo.svg"
+    LOGGER.info(f"Rendering {path}")
     with open(path, "wb") as f:
         f.write(nxv.render(graph, style, algorithm="neato", format="svg"))
     for size in [16, 32, 40, 48, 64, 128, 256]:
         style_with_dpi = nxv.compose([style, nxv.Style(graph={"dpi": size})])
         path = f"docs/_static/logo/logo-{size}.png"
-        LOGGER.info(f"Rendering: {path}")
+        LOGGER.info(f"Rendering {path}")
         with open(path, "wb") as f:
             f.write(nxv.render(graph, style_with_dpi, algorithm="neato", format="png"))
 
