@@ -2,6 +2,7 @@
 
 # nxv
 
+[![PyPI Status](https://img.shields.io/pypi/v/nxv.svg)](https://pypi.python.org/pypi/nxv)
 ![Tests](https://github.com/twosigma/nxv/workflows/Tests/badge.svg)
 [![Documentation Status](https://readthedocs.org/projects/nxv/badge/?version=latest)](https://nxv.readthedocs.io/en/latest/?badge=latest)
 
