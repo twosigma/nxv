@@ -2,7 +2,7 @@ name: Tests
 on: push
 jobs:
   tests:
-    name: Test on node ${{ matrix.node-version }} and ${{ matrix.os }}
+    name: Test on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
