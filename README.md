@@ -8,8 +8,6 @@ Render NetworkX graphs using GraphViz.
 
 https://nxv.readthedocs.io/
 
-<img src="./docs/_static/example/quickstart_graph.svg" align="right">
-
 # Basic Usage
 
     import networkx as nx
@@ -20,7 +18,16 @@ https://nxv.readthedocs.io/
     graph.add_edge("B", "C")
     graph.add_edge("C", "D")
     graph.add_edge("B", "E")
-    nxv.render(graph)
+
+    style = nxv.Style(
+        graph={"rankdir": "LR"},
+        node=lambda u, d: {"shape": "circle" if u in "AEIOU" else "square"},
+        edge=lambda u, v, d: {"style": "dashed", "label": u + v},
+    )
+    
+    nxv.render(graph, style)
+
+<img src="./docs/_static/example/quickstart_graph_functional_style.svg">
 
 # Installation
 
