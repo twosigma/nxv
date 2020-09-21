@@ -18,8 +18,10 @@ import tempfile
 
 import nox
 
-PYTHON_VERSIONS = ["3.6", "3.7", "3.8"]
-SOURCES = ["src", "tests", "noxfile.py"]
+PYTHON_VERSIONS = "3.6", "3.7", "3.8"
+SOURCES = "src", "tests", "noxfile.py", "docs/conf.py"
+
+nox.options.sessions = "lint", "tests", "docs"
 
 
 def install_with_constraints(session, *args, **kwargs):
@@ -36,8 +38,18 @@ def install_with_constraints(session, *args, **kwargs):
         session.install(f"--constraint={requirements}", *args, **kwargs)
 
 
+@nox.session()
+def black(session):
+    """Run black code formatter."""
+    args = session.posargs or SOURCES
+    install_with_constraints(session, "black", "isort")
+    session.run("isort", *args)
+    session.run("black", *args)
+
+
 @nox.session(python=PYTHON_VERSIONS)
 def lint(session):
+    """Lint using flake8."""
     args = session.posargs or SOURCES
     install_with_constraints(
         session, "flake8", "flake8-black", "flake8-bugbear", "flake8-import-order"
@@ -47,6 +59,15 @@ def lint(session):
 
 @nox.session(python=PYTHON_VERSIONS)
 def tests(session):
+    """Run the test suite."""
     args = session.posargs or ["--cov"]
     session.run("poetry", "install", external=True)
     session.run("poetry", "run", "pytest", *args, external=True)
+
+
+@nox.session()
+def docs(session):
+    """Build the documentation."""
+    session.run("poetry", "install", external=True)
+    session.run("python", "-m", "docs")
+    session.run("sphinx-build", "docs", "docs/_build")

@@ -27,12 +27,17 @@ LOGGER = logging.getLogger("nxv")
 
 def main():
     logging.basicConfig(level="INFO")
+    build_examples()
+    build_logo()
+
+
+def build_examples():
     os.makedirs("docs/_static/example", exist_ok=True)
     for example in EXAMPLES:
-        run_example(example)
+        build_example(example)
 
 
-def run_example(example):
+def build_example(example):
     path = f"docs/_static/example/{example.__name__}.svg"
     with open(path, "wb") as f:
         LOGGER.info(f"Rendering {path}")
@@ -107,6 +112,40 @@ def quickstart_graph_functional_style(graph):
     )
     # END EXAMPLE
     return dict(graph=graph, style=style)
+
+
+def build_logo():
+    os.makedirs("docs/_static/logo", exist_ok=True)
+    graph = nx.Graph()
+    nx.add_path(graph, [0, 1, 2, 3, 4, 5, 0])
+    nx.add_star(graph, [6, 0, 1, 2, 3, 4, 5])
+    style = nxv.Style(
+        graph={
+            "pad": 1 / 8,
+            "bgcolor": "#00000000",
+            "size": "1,1",
+            "ratio": 1,
+        },
+        node=lambda u, d: {
+            "shape": "circle",
+            "label": None,
+            "width": 3 / 4,
+            "style": "filled",
+            "fillcolor": "#009AA6" if u % 2 else "#E37222",
+            "penwidth": 5,
+        },
+        edge={"penwidth": 5},
+    )
+    path = f"docs/_static/logo/logo.svg"
+    LOGGER.info(f"Rendering: {path}")
+    with open(path, "wb") as f:
+        f.write(nxv.render(graph, style, algorithm="neato", format="svg"))
+    for size in [16, 32, 40, 48, 64, 128, 256]:
+        style_with_dpi = nxv.compose([style, nxv.Style(graph={"dpi": size})])
+        path = f"docs/_static/logo/logo-{size}.png"
+        LOGGER.info(f"Rendering: {path}")
+        with open(path, "wb") as f:
+            f.write(nxv.render(graph, style_with_dpi, algorithm="neato", format="png"))
 
 
 if __name__ == "__main__":

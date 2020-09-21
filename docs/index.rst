@@ -20,6 +20,7 @@ nxv renders `NetworkX`_ graphs using `GraphViz`_.
    installation
    quickstart
    reference
+   license
 
 .. _NetworkX: https://networkx.github.io/documentation/stable/
 .. _GraphViz: https://graphviz.org/

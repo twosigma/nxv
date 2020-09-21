@@ -28,9 +28,27 @@ https://nxv.readthedocs.io/
 
 # Development
 
-This repository uses [Poetry](https://python-poetry.org/) and [Nox](https://nox.thea.codes/en/stable/)
-to manage the development environment.
+This repository uses
+[Poetry](https://python-poetry.org/) and
+[Nox](https://nox.thea.codes/en/stable/)
+to manage the development environment and builds.
 
-To run tests and lint:
+To list all Nox sessions:
 
-    python -m nox
+    python -m nox --list-sessions
+
+To run the black code formatter:
+
+    python -m nox -rs black
+
+To lint using flake8:
+
+    python -m nox -rs lint
+
+To run the test suite:
+
+    python -m nox -rs tests
+
+To build the documentation:
+
+    python -m nox -rs docs

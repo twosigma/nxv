@@ -22,7 +22,7 @@ Start by importing networkx and nxv.
 
 Define a simple `NetworkX`_ graph.
 
-.. literalinclude:: ../src/examples.py
+.. literalinclude:: ../src/docs.py
    :start-after: BEGIN EXAMPLE
    :end-before: END EXAMPLE
    :dedent: 4
@@ -38,7 +38,7 @@ Render the graph with `GraphViz`_ using the :func:`~nxv.render` function.
 
 Use a :class:`~nxv.Style` to specify how to style the graph using `GraphViz`_.
 
-.. literalinclude:: ../src/examples.py
+.. literalinclude:: ../src/docs.py
    :start-after: BEGIN EXAMPLE
    :end-before: END EXAMPLE
    :dedent: 4
@@ -56,7 +56,7 @@ Render the graph with the :class:`~nxv.Style` by passing it to the :func:`~nxv.r
 
 The :class:`~nxv.Style` parameters can be functions that map the parts of a graph to different styles.
 
-.. literalinclude:: ../src/examples.py
+.. literalinclude:: ../src/docs.py
    :start-after: BEGIN EXAMPLE
    :end-before: END EXAMPLE
    :dedent: 4
