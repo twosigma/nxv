@@ -1,6 +1,8 @@
-<img src="./docs/_static/logo/logo.svg" align="left">
+<img src="./docs/_static/logo/logo.svg" align="right">
 
 # nxv
+
+![Tests](https://github.com/twosigma/nxv/workflows/Tests/badge.svg)
 
 Render NetworkX graphs using GraphViz.
 
