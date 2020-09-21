@@ -25,15 +25,22 @@ class Style:
     See the `GraphViz attributes`_ documentation for information on what attributes
     are available to use with the ``graph``, ``node``, ``edge``, and ``subgraph`` parameters.
 
-    :param graph: An optional dict of `GraphViz graph attributes`_, or a function ``f(g, d)`` that returns it, in which
-                  ``g`` is the `NetworkX`_ graph and ``d`` is its attribute dict.
-    :param node: An optional dict of `GraphViz node attributes`_, or a function ``f(u, d)`` that returns it, in which
-                 ``u`` is a `NetworkX`_ node and ``d`` is its attribute dict.
-    :param edge: An optional dict of `GraphViz edge attributes`_, or a function ``f(u, v, d)`` that returns it, in which
-                 ``(u, v)`` is a `NetworkX`_ edge and ``d`` is its attribute dict. If styling a graph with multi-edges,
-                 the signature should be ``f(u, v, k, d)`` instead, where ``k`` is the edge key.
-    :param subgraph: An optional dict of `GraphViz subgraph attributes`_, or a function ``f(s)`` that returns it, in which
-                     ``s`` is a subgraph key. This only applies when calling ``nxv.render`` with a ``subgraph_func``.
+    :param graph: An optional dict of `GraphViz graph attributes`_,
+                  or a function ``f(g, d)`` that returns it,
+                  in which ``g`` is the `NetworkX`_ graph and ``d`` is its attribute dict.
+    :param node: An optional dict of `GraphViz node attributes`_,
+                 or a function ``f(u, d)`` that returns it,
+                 in which ``u`` is a `NetworkX`_ node and ``d`` is its attribute dict.
+    :param edge: An optional dict of `GraphViz edge attributes`_,
+                 or a function ``f(u, v, d)`` that returns it,
+                 in which ``(u, v)`` is a `NetworkX`_ edge and ``d`` is its attribute dict.
+                 If styling a graph with multi-edges,
+                 the signature should be ``f(u, v, k, d)`` instead,
+                 where ``k`` is the edge key.
+    :param subgraph: An optional dict of `GraphViz subgraph attributes`_,
+                     or a function ``f(s)`` that returns it,
+                     in which ``s`` is a subgraph key.
+                     This only applies when calling ``nxv.render`` with a ``subgraph_func``.
     """
 
     def __init__(self, *, graph=None, node=None, edge=None, subgraph=None):

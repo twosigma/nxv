@@ -62,13 +62,14 @@ def networkx_plus_graphviz():
     graph.add_edge("NetworkX", "+")
     graph.add_edge("GraphViz", "+")
     graph.add_edge("+", "nxv")
-    
+
     style = nxv.Style(
         node=lambda u, d: {"shape": "circle" if u == "+" else "box"},
     )
     style = nxv.compose([style, nxv.styles.font(fontname="Lato")])
     # END EXAMPLE
     return dict(graph=graph, style=style)
+
 
 @register_example
 def quickstart_graph():

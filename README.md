@@ -8,3 +8,8 @@
     graph = nx.Graph()
     style = nxv.Style(...)
     nxv.render(graph, style)
+
+# Developing
+
+- Install poetry: https://python-poetry.org/
+- `pip install --user nox`

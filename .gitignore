@@ -1,6 +1,7 @@
 __pycache__
-.pytest_cache
 .coverage
+.nox
+.pytest_cache
 poetry.lock
 *.egg-info
 _build

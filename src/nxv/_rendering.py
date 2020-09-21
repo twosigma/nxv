@@ -99,8 +99,8 @@ def _to_gv(graph, style: Style, subgraph_func=None):
 
     :param graph: A `NetworkX`_ ``Graph``, ``DiGraph``, ``MultiGraph``, or ``MultiDiGraph``.
     :param style: A :class:`~nxv.Style` object.
-    :param subgraph_func: An optional function ``f(u, d)`` that returns a subgraph key, where ``u`` is a `NetworkX`_ node
-                          and ``d`` is its attribute dict.
+    :param subgraph_func: An optional function ``f(u, d)`` that returns a subgraph key,
+                          where ``u`` is a `NetworkX`_ node and ``d`` is its attribute dict.
     :return: The raw `GraphViz`_ string format to pass as input to one of the GraphViz layout algorithms.
     """
 
@@ -179,13 +179,17 @@ def render(
 
     :param graph: A `NetworkX`_ graph.
     :param style: A style specifying how graph nodes and edges should map to `GraphViz attributes`_.
-    :param subgraph_func: An optional function ``f(u, d)`` that returns a subgraph key, where ``u`` is a `NetworkX`_ node
-                          and ``d`` is its attribute dict. If it returns ``None`` the node is not in any subgraph.
-    :param algorithm: The `GraphViz`_ layout algorithm. Valid options are ``"circo"``, ``"dot"``, ``"fdp"``, ``"neato"``,
-                      ``"osage"``, ``"sfdp"``, ``"twopi"``. Defaults to ``"dot"``.
+    :param subgraph_func: An optional function ``f(u, d)`` that returns a subgraph key,
+                          where ``u`` is a `NetworkX`_ node and ``d`` is its attribute dict.
+                          If it returns ``None`` the node is not in any subgraph.
+    :param algorithm: The `GraphViz`_ layout algorithm.
+                      Valid options include
+                      ``"circo"``, ``"dot"``, ``"fdp"``, ``"neato"``, ``"osage"``, ``"sfdp"``, ``"twopi"``.
+                      Defaults to ``"dot"``.
     :param format: The `GraphViz`_ output format. Valid options include ``"svg"`` and ``"raw"``. In a Jupyter
                    notebook, prefixing the ``format`` with ``"ipython/"`` will automatically display the rendered
-                   output. When running in an interactive setting like a Jupyter notebook, the default is ``"ipython/svg"``.
+                   output.
+                   When running in an interactive setting like a Jupyter notebook, the default is ``"ipython/svg"``.
                    Otherwise, this parameter is required.
     :param graphviz_bin: The ``bin`` directory of the `GraphViz`_ installation.
                          Defaults to the ``GRAPHVIZ_BIN`` environment variable.

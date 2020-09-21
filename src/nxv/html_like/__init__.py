@@ -17,7 +17,7 @@
 The ``nxv.html_like`` subpackage provides functions for building
 `GraphViz HTML-like labels <https://graphviz.org/doc/info/shapes.html#html>`_.
 
-The idiomatic import for this subpackage is: 
+The idiomatic import for this subpackage is:
 
 .. code-block:: python
 

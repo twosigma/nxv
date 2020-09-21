@@ -28,7 +28,8 @@ def assert_execution_context():
     """Asserts that the current execution context is IPython."""
     if not is_execution_context():
         raise ValueError(
-            "Must be running in an IPython execution context to use an ipython/* format."
+            "Must be running in an IPython execution context "
+            "to use an ipython/* format."
         )
 
 
@@ -41,6 +42,7 @@ def display(data, format):
     constructor = formats.get(format, None)
     if constructor is None:
         raise ValueError(
-            f"Invalid IPython format {format!r}. Valid IPython formats are {set(formats)}."
+            f"Invalid IPython format {format!r}. "
+            f"Valid IPython formats are {set(formats)}."
         )
     display(constructor(data))

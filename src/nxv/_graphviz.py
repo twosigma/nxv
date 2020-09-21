@@ -70,7 +70,8 @@ def get_graphviz_bins(graphviz_bin: Optional[str]) -> List[str]:
     if graphviz_bin:
         if not os.path.isdir(graphviz_bin):
             raise GraphVizInstallationNotFoundError(
-                f"No GraphViz installation was found at the location specified by the graphviz_bin parameter: {graphviz_bin}"
+                f"No GraphViz installation was found at the location specified "
+                f"by the graphviz_bin parameter: {graphviz_bin}"
             )
         return [graphviz_bin]
 
@@ -78,7 +79,8 @@ def get_graphviz_bins(graphviz_bin: Optional[str]) -> List[str]:
     if graphviz_bin:
         if not os.path.isdir(graphviz_bin):
             raise GraphVizInstallationNotFoundError(
-                f"No GraphViz installation was found at the location specified by the GRAPHVIZ_BIN environment variable: {graphviz_bin}"
+                f"No GraphViz installation was found at the location specified "
+                f"by the GRAPHVIZ_BIN environment variable: {graphviz_bin}"
             )
         return [graphviz_bin]
 
@@ -91,7 +93,8 @@ def get_graphviz_bins(graphviz_bin: Optional[str]) -> List[str]:
         return graphviz_bins
 
     raise GraphVizInstallationNotFoundError(
-        "No GraphViz installation was specified. Use either the graphviz_bin parameter or the GRAPHVIZ_BIN environment variable."
+        "No GraphViz installation was specified. "
+        "Use either the graphviz_bin parameter or the GRAPHVIZ_BIN environment variable."
     )
 
 
