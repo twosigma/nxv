@@ -4,11 +4,11 @@
 
 nxv renders NetworkX graphs using GraphViz.
 
-<img src="./docs/_static/example/quickstart_graph.svg" align="right">
-
 # Documentation
 
 https://nxv.readthedocs.io/
+
+<img src="./docs/_static/example/quickstart_graph.svg" align="right">
 
 # Basic Usage
 
@@ -17,6 +17,9 @@ https://nxv.readthedocs.io/
     
     graph = nx.Graph()
     graph.add_edge("A", "B")
+    graph.add_edge("B", "C")
+    graph.add_edge("C", "D")
+    graph.add_edge("B", "E")
     nxv.render(graph)
 
 # Installation
