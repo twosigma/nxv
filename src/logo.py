@@ -25,29 +25,31 @@ def main():
     graph = nx.Graph()
     nx.add_path(graph, [0, 1, 2, 3, 4, 5, 0])
     nx.add_star(graph, [6, 0, 1, 2, 3, 4, 5])
+    style = nxv.Style(
+        graph={
+            "pad": 1 / 8,
+            "bgcolor": "#00000000",
+            "size": "1,1",
+            "ratio": 1,
+        },
+        node=lambda u, d: {
+            "shape": "circle",
+            "label": None,
+            "width": 3 / 4,
+            "style": "filled",
+            "fillcolor": "#009AA6" if u % 2 else "#E37222",
+            "penwidth": 5,
+        },
+        edge={"penwidth": 5},
+    )
+    output = nxv.render(graph, style, algorithm="neato", format="svg")
+    with open(f"docs/_static/logo/logo.svg", "wb") as f:
+        f.write(output)
     for size in [16, 32, 40, 48, 64, 128, 256]:
-        style = nxv.Style(
-            graph={
-                "pad": 1 / 8,
-                "bgcolor": "#00000000",
-                "size": "1,1",
-                "ratio": 1,
-                "dpi": size,
-            },
-            node=lambda u, d: {
-                "shape": "circle",
-                "label": None,
-                "width": 3 / 4,
-                "style": "filled",
-                "fillcolor": "#009AA6" if u % 2 else "#E37222",
-                "penwidth": 5,
-            },
-            edge={"penwidth": 5},
-        )
-        for format in ["svg", "png"]:
-            output = nxv.render(graph, style, algorithm="neato", format=format)
-            with open(f"docs/_static/logo/logo-{size}.{format}", "wb") as f:
-                f.write(output)
+        style_with_dpi = nxv.compose([style, nxv.Style(graph={"dpi": size})])
+        output = nxv.render(graph, style_with_dpi, algorithm="neato", format="png")
+        with open(f"docs/_static/logo/logo-{size}.png", "wb") as f:
+            f.write(output)
 
 
 if __name__ == "__main__":
