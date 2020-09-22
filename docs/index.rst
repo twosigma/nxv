@@ -9,10 +9,20 @@ nxv renders `NetworkX`_ graphs using `GraphViz`_.
    import nxv
 
    graph = nx.Graph()
-   style = nxv.Style(...)
+   graph.add_edge("A", "B")
+   graph.add_edge("B", "C")
+   graph.add_edge("C", "D")
+   graph.add_edge("B", "E")
+
+   style = nxv.Style(
+      graph={"rankdir": "LR"},
+      node=lambda u, d: {"shape": "circle" if u in "AEIOU" else "square"},
+      edge=lambda u, v, d: {"style": "dashed", "label": u + v},
+   )
+
    nxv.render(graph, style)
 
-.. image:: _static/example/networkx_plus_graphviz.svg
+.. image:: _static/example/quickstart_graph_functional_style.svg
 
 .. toctree::
    :maxdepth: 2
