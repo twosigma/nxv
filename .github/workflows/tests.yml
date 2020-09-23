@@ -10,9 +10,9 @@ jobs:
         - ubuntu-latest
         - windows-latest
         python:
-        - 3.6
-        - 3.7
-        - 3.8
+        - "3.6"
+        - "3.7"
+        - "3.8"
         include:
         - os: ubuntu-latest
           graphviz_bin: /usr/bin/
