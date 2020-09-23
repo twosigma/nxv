@@ -21,18 +21,6 @@ from subprocess import PIPE, Popen
 from typing import List, Optional
 
 
-class GraphVizError(Exception):
-    """Raised when a `GraphViz`_ run fails."""
-
-
-class GraphVizInstallationNotFoundError(Exception):
-    """Raised when a `GraphViz`_ installation is not found."""
-
-
-class GraphVizAlgorithmNotFoundError(Exception):
-    """Raised when a `GraphViz`_ algorithm is not found."""
-
-
 @lru_cache()
 def is_windows() -> bool:
     return platform.system().lower() == "windows"
@@ -67,6 +55,8 @@ def try_get_graphviz_algorithm_path(graphviz_bin: str, algorithm: str) -> Option
 
 @lru_cache()
 def get_graphviz_bins(graphviz_bin: Optional[str]) -> List[str]:
+    from nxv import GraphVizInstallationNotFoundError
+
     if graphviz_bin:
         if not os.path.isdir(graphviz_bin):
             raise GraphVizInstallationNotFoundError(
@@ -100,6 +90,8 @@ def get_graphviz_bins(graphviz_bin: Optional[str]) -> List[str]:
 
 @lru_cache()
 def get_graphviz_algorithm_path(graphviz_bin: Optional[str], algorithm: str) -> str:
+    from nxv import GraphVizAlgorithmNotFoundError
+
     graphviz_bins = get_graphviz_bins(graphviz_bin)
     for graphviz_bin in graphviz_bins:
         path = try_get_graphviz_algorithm_path(graphviz_bin, algorithm)
@@ -123,6 +115,8 @@ def run(gv, algorithm, format, graphviz_bin):
     :return: The output bytes.
     :raises GraphVizError: If `GraphViz`_ failed to run on the given inputs.
     """
+    from nxv import GraphVizError
+
     algorithm_path = get_graphviz_algorithm_path(graphviz_bin, algorithm)
     p = Popen(
         [algorithm_path, f"-T{format}"],

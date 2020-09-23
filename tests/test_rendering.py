@@ -16,6 +16,7 @@
 import textwrap
 
 import networkx as nx
+import pytest
 
 import nxv
 import nxv.html_like as H
@@ -180,3 +181,13 @@ def test_color():
     for channels, expected in instances:
         actual = color(channels)
         assert actual == expected
+
+
+def test_render_invalid():
+    graph = nx.Graph()
+    graph.add_node(0)
+    style = nxv.Style(
+        node={"label": H.table(["x"], attributes={"notanattribute": "y"})}
+    )
+    with pytest.raises(nxv.GraphVizError):
+        nxv.render(graph, style, format="svg")

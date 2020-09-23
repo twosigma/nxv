@@ -22,14 +22,22 @@ __version__ = "0.1.0"
 
 from nxv import html_like, styles
 from nxv._functional import chain, switch
-from nxv._graphviz import (
-    GraphVizAlgorithmNotFoundError,
-    GraphVizError,
-    GraphVizInstallationNotFoundError,
-)
 from nxv._rendering import render
 from nxv._style import Style, compose
 from nxv._util import boundary, contrasting_color, neighborhood, to_ordered_graph
+
+
+class GraphVizError(Exception):
+    """Raised when a `GraphViz`_ run fails."""
+
+
+class GraphVizInstallationNotFoundError(Exception):
+    """Raised when a `GraphViz`_ installation is not found."""
+
+
+class GraphVizAlgorithmNotFoundError(Exception):
+    """Raised when a `GraphViz`_ algorithm is not found."""
+
 
 __all__ = [
     "render",
