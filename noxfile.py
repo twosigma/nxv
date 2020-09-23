@@ -18,7 +18,6 @@ import tempfile
 
 import nox
 
-PYTHON_VERSIONS = "3.6", "3.7", "3.8"
 SOURCES = "src", "tests", "noxfile.py", "docs/conf.py"
 
 nox.options.sessions = "lint", "tests", "docs"
@@ -47,7 +46,7 @@ def black(session):
     session.run("black", *args)
 
 
-@nox.session(python=PYTHON_VERSIONS)
+@nox.session()
 def lint(session):
     """Lint using flake8."""
     args = session.posargs or SOURCES
@@ -55,7 +54,7 @@ def lint(session):
     session.run("poetry", "run", "flake8", *args, external=True)
 
 
-@nox.session(python=PYTHON_VERSIONS)
+@nox.session()
 def tests(session):
     """Run the test suite."""
     args = session.posargs or ["--cov"]
