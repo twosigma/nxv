@@ -33,6 +33,6 @@ def verbose() -> Style:
     """
     return Style(
         graph=lambda g, d: {"label": f"Graph Attributes: {d}", "labelloc": "t"},
-        node=lambda u, d: {"label": "{u}\n{d}", "shape": "box"},
+        node=lambda u, d: {"label": f"{u}\n{d}", "shape": "box"},
         edge=_verbose_edge,
     )

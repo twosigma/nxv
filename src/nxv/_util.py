@@ -212,13 +212,10 @@ def to_ordered_graph(graph, node_key=None, edge_key=None, attr_key=None):
 
 
 def _relative_luminance_helper(x):
-    if x <= 0.0:
-        return 0.0
+    x = max(0, min(x, 1))
     if x <= 0.03928:
         return x / 12.92
-    if x <= 1.0:
-        return ((x + 0.055) / 1.055) ** 2.4
-    return 1.0
+    return ((x + 0.055) / 1.055) ** 2.4
 
 
 def _relative_luminance(channels):

@@ -77,7 +77,7 @@ def bold(content):
 
 
 def underline(content):
-    return HtmlLike("", children=[content])
+    return HtmlLike("U", children=[content])
 
 
 def overline(content):
