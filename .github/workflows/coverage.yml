@@ -2,7 +2,16 @@ name: Coverage
 on: push
 jobs:
   coverage:
-    runs-on: ubuntu-latest
+    name: Upload coverage data using ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os:
+        - ubuntu-latest
+        - windows-latest
+        include:
+        - os: ubuntu-latest
+          graphviz_bin: /usr/bin/
     steps:
     - uses: actions/checkout@v2
     - uses: actions/setup-python@v1
@@ -16,5 +25,5 @@ jobs:
     - run: nox -s tests coverage
       env:
         CODECOV_TOKEN: ${{secrets.CODECOV_TOKEN}}
-        GRAPHVIZ_BIN: /usr/bin/
+        GRAPHVIZ_BIN: ${{matrix.graphviz_bin}}
  
