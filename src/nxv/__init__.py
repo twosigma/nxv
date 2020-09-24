@@ -18,7 +18,7 @@
 __author__ = "Timothy Shields"
 __maintainer__ = "Timothy Shields"
 __email__ = "Timothy.Shields@twosigma.com"
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 
 from nxv import html_like, styles
 from nxv._functional import chain, switch
