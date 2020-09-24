@@ -24,10 +24,9 @@ jobs:
         architecture: x64
     - name: Setup Graphviz
       uses: ts-graphviz/setup-graphviz@v1
+    - run: pip install nox
     - run: pip install poetry
-    - run: poetry install
-    - run: poetry run flake8 src tests
-    - run: poetry run pytest --cov
+    - run: nox
       env:
         GRAPHVIZ_BIN: ${{ matrix.graphviz_bin }}
  
