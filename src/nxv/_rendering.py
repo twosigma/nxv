@@ -204,7 +204,9 @@ def render(
     if algorithm is None:
         algorithm = "dot"
     if not algorithm or not isinstance(algorithm, str):
-        raise ValueError("The algorithm parameter must be the str name of a valid GraphViz algorithm.")
+        raise ValueError(
+            "The algorithm parameter must be the str name of a valid GraphViz algorithm."
+        )
 
     if format is None:
         if _ipython.is_execution_context():
