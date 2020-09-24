@@ -13,8 +13,26 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+import os
+import re
+
 import nxv
+
+EXPECTED_VERSION = "0.1.1"
+REPOSITORY_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+
+
+def get_version_from_package():
+    return nxv.__version__
+
+
+def get_version_from_pyproject_toml():
+    path = os.path.join(REPOSITORY_ROOT, "pyproject.toml")
+    with open(path) as f:
+        text = f.read()
+    return re.search(r"^\s*version\s*=\s*\"([^\s]+)\"\s*$", text, re.MULTILINE).group(1)
 
 
 def test_version():
-    assert nxv.__version__ == "0.1.0"
+    assert get_version_from_package() == EXPECTED_VERSION
+    assert get_version_from_pyproject_toml() == EXPECTED_VERSION
