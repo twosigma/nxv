@@ -167,7 +167,7 @@ def render(
     graph: Union[nx.Graph, nx.DiGraph, nx.MultiGraph, nx.MultiDiGraph],
     style: Optional[Style] = None,
     *,
-    algorithm: str = "dot",
+    algorithm: Optional[str] = None,
     format: Optional[str] = None,
     graphviz_bin: Optional[str] = None,
     subgraph_func=None,
@@ -201,6 +201,11 @@ def render(
     :raises GraphVizAlgorithmNotFoundError: If nxv cannot find the specified algorithm in a `GraphViz`_ installation.
     :raises GraphVizError: If `GraphViz`_ failed to run on the given inputs.
     """
+    if algorithm is None:
+        algorithm = "dot"
+    if not algorithm or not isinstance(algorithm, str):
+        raise ValueError("The algorithm parameter must be the str name of a valid GraphViz algorithm.")
+
     if format is None:
         if _ipython.is_execution_context():
             format = "ipython/svg"
