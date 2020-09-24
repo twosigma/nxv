@@ -76,21 +76,22 @@ def get_graphviz_bins(graphviz_bin: Optional[str], algorithm: str) -> List[str]:
                 f"by the GRAPHVIZ_BIN environment variable: {graphviz_bin}"
             )
         return [graphviz_bin]
-
-    # Otherwise, use directory containing the result of `which {algorithm}`
-    graphviz_bin = shutil.which(algorithm)
-    if graphviz_bin:
-        graphviz_bin = os.path.dirname(graphviz_bin)
-        return [graphviz_bin]
-
-    # Otherwise, on Windows, look for the standard install locations
+    
     if is_windows():
+        # Otherwise, on Windows, look for the standard install locations
         graphviz_bins = get_windows_graphviz_bins()
         if not graphviz_bins:
             raise GraphVizInstallationNotFoundError(
                 "No GraphViz installation was found at any of the standard Windows locations."
             )
         return graphviz_bins
+    else:
+        # Otherwise, on non-Windows, use directory containing the result of `which {algorithm}`
+        # shutil.which seems to be broken on Windows as of Python 3.8.1
+        graphviz_bin = shutil.which(algorithm)
+        if graphviz_bin:
+            graphviz_bin = os.path.dirname(graphviz_bin)
+            return [graphviz_bin]
 
     raise GraphVizInstallationNotFoundError(
         "No GraphViz installation was specified. "
