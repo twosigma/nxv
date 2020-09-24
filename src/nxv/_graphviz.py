@@ -16,6 +16,7 @@
 import os
 import platform
 import re
+import shutil
 from functools import lru_cache
 from subprocess import PIPE, Popen
 from typing import List, Optional
@@ -57,6 +58,7 @@ def try_get_graphviz_algorithm_path(graphviz_bin: str, algorithm: str) -> Option
 def get_graphviz_bins(graphviz_bin: Optional[str]) -> List[str]:
     from nxv import GraphVizInstallationNotFoundError
 
+    # Always use an explicit value if specified
     if graphviz_bin:
         if not os.path.isdir(graphviz_bin):
             raise GraphVizInstallationNotFoundError(
@@ -65,6 +67,7 @@ def get_graphviz_bins(graphviz_bin: Optional[str]) -> List[str]:
             )
         return [graphviz_bin]
 
+    # Otherwise, always use an explicit environment variable if specified
     graphviz_bin = os.environ.get("GRAPHVIZ_BIN")
     if graphviz_bin:
         if not os.path.isdir(graphviz_bin):
@@ -74,6 +77,13 @@ def get_graphviz_bins(graphviz_bin: Optional[str]) -> List[str]:
             )
         return [graphviz_bin]
 
+    # Otherwise, use directory containing the result of `which dot`
+    graphviz_bin = shutil.which("dot")
+    if graphviz_bin:
+        graphviz_bin = os.path.dirname(graphviz_bin)
+        return [graphviz_bin]
+
+    # Otherwise, on Windows, look for the standard install locations
     if is_windows():
         graphviz_bins = get_windows_graphviz_bins()
         if not graphviz_bins:

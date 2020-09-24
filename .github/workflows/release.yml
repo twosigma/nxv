@@ -16,7 +16,5 @@ jobs:
     - run: pip install nox
     - run: pip install poetry
     - run: nox
-      env:
-        GRAPHVIZ_BIN: /usr/bin/
     - run: poetry build
     - run: poetry publish --username=__token__ --password=${{ secrets.PYPI_TOKEN }}

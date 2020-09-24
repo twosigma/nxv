@@ -13,9 +13,6 @@ jobs:
         - "3.6"
         - "3.7"
         - "3.8"
-        include:
-        - os: ubuntu-latest
-          graphviz_bin: /usr/bin/
     steps:
     - uses: actions/checkout@v2
     - uses: actions/setup-python@v1
@@ -27,6 +24,4 @@ jobs:
     - run: pip install nox
     - run: pip install poetry
     - run: nox
-      env:
-        GRAPHVIZ_BIN: ${{ matrix.graphviz_bin }}
  
