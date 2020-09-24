@@ -55,7 +55,7 @@ def try_get_graphviz_algorithm_path(graphviz_bin: str, algorithm: str) -> Option
 
 
 @lru_cache()
-def get_graphviz_bins(graphviz_bin: Optional[str]) -> List[str]:
+def get_graphviz_bins(graphviz_bin: Optional[str], algorithm: str) -> List[str]:
     from nxv import GraphVizInstallationNotFoundError
 
     # Always use an explicit value if specified
@@ -77,8 +77,8 @@ def get_graphviz_bins(graphviz_bin: Optional[str]) -> List[str]:
             )
         return [graphviz_bin]
 
-    # Otherwise, use directory containing the result of `which dot`
-    graphviz_bin = shutil.which("dot")
+    # Otherwise, use directory containing the result of `which {algorithm}`
+    graphviz_bin = shutil.which(algorithm)
     if graphviz_bin:
         graphviz_bin = os.path.dirname(graphviz_bin)
         return [graphviz_bin]
@@ -102,7 +102,7 @@ def get_graphviz_bins(graphviz_bin: Optional[str]) -> List[str]:
 def get_graphviz_algorithm_path(graphviz_bin: Optional[str], algorithm: str) -> str:
     from nxv import GraphVizAlgorithmNotFoundError
 
-    graphviz_bins = get_graphviz_bins(graphviz_bin)
+    graphviz_bins = get_graphviz_bins(graphviz_bin, algorithm)
     for graphviz_bin in graphviz_bins:
         path = try_get_graphviz_algorithm_path(graphviz_bin, algorithm)
         if path:
