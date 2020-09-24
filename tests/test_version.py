@@ -18,7 +18,7 @@ import re
 
 import nxv
 
-EXPECTED_VERSION = "0.1.1"
+EXPECTED_VERSION = "0.1.2"
 REPOSITORY_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 
 
