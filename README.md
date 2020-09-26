@@ -1,4 +1,4 @@
-<img src="./docs/_static/logo/logo.svg" align="right">
+<img src="https://github.com/twosigma/nxv/raw/main/docs/_static/logo/logo.svg" align="right">
 
 # nxv
 
