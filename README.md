@@ -3,7 +3,7 @@
 # nxv
 
 [![PyPI Status](https://img.shields.io/pypi/v/nxv.svg)](https://pypi.python.org/pypi/nxv)
-![Tests](https://github.com/twosigma/nxv/workflows/Tests/badge.svg)
+[![Tests](https://github.com/twosigma/nxv/workflows/Tests/badge.svg)](https://github.com/twosigma/nxv/actions)
 [![Documentation Status](https://readthedocs.org/projects/nxv/badge/?version=latest)](https://nxv.readthedocs.io/en/latest/?badge=latest)
 [![Codecov](https://codecov.io/gh/twosigma/nxv/branch/main/graph/badge.svg)](https://codecov.io/gh/twosigma/nxv)
 
