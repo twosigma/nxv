@@ -14,6 +14,8 @@
 # limitations under the License.
 #
 import textwrap
+from contextlib import ExitStack, contextmanager
+from unittest.mock import patch
 
 import networkx as nx
 import pytest
@@ -183,6 +185,13 @@ def test_color():
         assert actual == expected
 
 
+def test_render_color():
+    graph = nx.Graph()
+    graph.add_node(0)
+    style = nxv.Style(node={"label": None, "color": (1, 1, 1)})
+    nxv.render(graph, style, format="svg")
+
+
 def test_render_invalid():
     graph = nx.Graph()
     graph.add_node(0)
@@ -191,3 +200,42 @@ def test_render_invalid():
     )
     with pytest.raises(nxv.GraphVizError):
         nxv.render(graph, style, format="svg")
+
+
+def test_render_no_format_outside_ipython():
+    graph = nx.Graph()
+    with pytest.raises(ValueError):
+        nxv.render(graph)
+
+
+@contextmanager
+def mock_ipython_execution_context():
+    with patch("nxv._ipython.is_execution_context") as mock:
+        mock.return_Value = True
+        yield
+
+
+@contextmanager
+def assert_ipython_display_call(data, format):
+    with ExitStack() as stack:
+        stack.enter_context(mock_ipython_execution_context())
+        mock = stack.enter_context(patch("nxv._ipython.display"))
+        yield
+        mock.assert_called_once_with(data, format)
+
+
+def test_render_no_format_inside_ipython():
+    graph = nx.Graph()
+    graph.add_edge("A", "B")
+    output = nxv.render(graph)
+    with assert_ipython_display_call(output, "ipython/svg"):
+        nxv.render(graph)
+
+
+def test_render_no_format_inside_ipython():
+    graph = nx.Graph()
+    graph.add_edge("A", "B")
+    for format in ["svg", "png", "raw"]:
+        output = nxv.render(graph, format=format)
+        with assert_ipython_display_call(output, f"ipython/{format}"):
+            nxv.render(graph, format=f"ipython/{format}")

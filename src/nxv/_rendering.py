@@ -45,8 +45,6 @@ def _to_gv_string(value, attribute=None):
         if attribute in LABEL_ATTRIBUTES and isinstance(value, HtmlLike):
             return "<" + render_html_like(value) + ">"
     value = str(value)
-    if not value:
-        return '""'
     escape_char = "\\"
     need_escape = {'"', escape_char}
 
@@ -225,13 +223,9 @@ def render(
     gv = _to_gv(graph, style, subgraph_func=subgraph_func)
 
     if graphviz_format == "raw":
-        if is_ipython_format:
-            print(gv)
-            return None
-        else:
-            return gv
-
-    output = _graphviz.run(gv, algorithm, graphviz_format, graphviz_bin)
+        output = gv
+    else:
+        output = _graphviz.run(gv, algorithm, graphviz_format, graphviz_bin)
 
     if is_ipython_format:
         _ipython.display(output, format)

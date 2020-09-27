@@ -38,6 +38,10 @@ def display(data, format):
     assert_execution_context()
     from IPython.display import SVG, Image, display
 
+    if format == "ipython/raw":
+        print(data)
+        return
+
     formats = {"ipython/svg": SVG, "ipython/png": Image}
     constructor = formats.get(format, None)
     if constructor is None:
