@@ -202,7 +202,7 @@ def test_render_invalid():
         nxv.render(graph, style, format="svg")
 
 
-def test_render_no_format_outside_ipython():
+def test_render_default_format_outside_ipython():
     graph = nx.Graph()
     with pytest.raises(ValueError):
         nxv.render(graph)
@@ -224,15 +224,15 @@ def assert_ipython_display_call(data, format):
         mock.assert_called_once_with(data, format)
 
 
-def test_render_no_format_inside_ipython():
+def test_render_default_format_inside_ipython():
     graph = nx.Graph()
     graph.add_edge("A", "B")
-    output = nxv.render(graph)
+    output = nxv.render(graph, format="svg")
     with assert_ipython_display_call(output, "ipython/svg"):
         nxv.render(graph)
 
 
-def test_render_no_format_inside_ipython():
+def test_render_explicit_ipython_format_inside_ipython():
     graph = nx.Graph()
     graph.add_edge("A", "B")
     for format in ["svg", "png", "raw"]:
